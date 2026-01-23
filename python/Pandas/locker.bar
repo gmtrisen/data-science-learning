@@ -1,0 +1,40 @@
+cls
+@ECHO OFF
+title Folder Locker
+if EXIST "Locker" goto UNLOCK
+if NOT EXIST Private goto MDLOCKER
+:CONFIRM
+echo Are you sure you want to lock the folder? (Y/N)
+set/p "cho=>"
+if %cho%==Y goto LOCK
+if %cho%==y goto LOCK
+if %cho%==N goto END
+if %cho%==n goto END
+echo Invalid choice.
+goto CONFIRM
+
+:LOCK
+ren Private Locker
+attrib +h +s Locker
+echo Folder locked
+goto End
+
+:UNLOCK
+echo Enter password to unlock folder
+set/p "pass=>"
+if NOT %pass%== YOUR_PASSWORD goto FAIL
+attrib -h -s Locker
+ren Locker Private
+echo Folder unlocked
+goto End
+
+:FAIL
+echo Wrong password
+goto end
+
+:MDLOCKER
+md Private
+echo Private folder created
+goto End
+
+:End
