@@ -1,0 +1,18 @@
+-- LESSON 1: Creating Tables in SQLite
+-- This lesson introduces basic table creation.
+
+-- Create a table for storing product information
+
+CREATE TABLE products(
+    product_id INTEGER PRIMARY KEY,
+    product_name TEXT NOT NULL,
+    category TEXT,
+    price REAL,
+    stock INTEGER
+);
+
+-- View table structure
+.schema products
+
+-- View table contents
+SELECT * FROM products;

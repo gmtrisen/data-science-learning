@@ -1,0 +1,59 @@
+-- LESSON 9: Database Normalization
+
+-- Create departments table
+
+CREATE TABLE departments_normalized(
+    department_id INTEGER PRIMARY KEY,
+    department_name TEXT UNIQUE,
+    manager TEXT
+);
+
+-- Insert department data
+
+INSERT INTO departments_normalized
+(department_name, manager)
+VALUES ('IT','Alice');
+
+INSERT INTO departments_normalized
+(department_name, manager)
+VALUES ('HR','Mark');
+
+INSERT INTO departments_normalized
+(department_name, manager)
+VALUES ('Finance','Grace');
+
+-- Create employees table linked to departments
+
+CREATE TABLE employees_normalized(
+    employee_id INTEGER PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    salary REAL,
+    department_id INTEGER,
+    FOREIGN KEY (department_id)
+    REFERENCES departments_normalized(department_id)
+);
+
+-- Insert employees
+
+INSERT INTO employees_normalized
+(first_name,last_name,salary,department_id)
+VALUES ('John','Doe',55000,1);
+
+INSERT INTO employees_normalized
+(first_name,last_name,salary,department_id)
+VALUES ('Jane','Smith',80000,2);
+
+INSERT INTO employees_normalized
+(first_name,last_name,salary,department_id)
+VALUES ('David','Kimani',80000,1);
+
+-- Join normalized tables
+
+SELECT
+e.first_name,
+e.last_name,
+d.department_name
+FROM employees_normalized e
+JOIN departments_normalized d
+ON e.department_id = d.department_id;

@@ -1,0 +1,40 @@
+-- LESSON 5: SQL JOINS
+
+-- Create departments table
+
+CREATE TABLE departments(
+    department_id INTEGER PRIMARY KEY,
+    department_name TEXT
+);
+
+-- Create employees table
+
+CREATE TABLE employees(
+    employee_id INTEGER PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    salary REAL,
+    department_id INTEGER
+);
+
+-- Insert departments
+
+INSERT INTO departments VALUES (1,'IT');
+INSERT INTO departments VALUES (2,'HR');
+INSERT INTO departments VALUES (3,'Finance');
+
+-- Insert employees
+
+INSERT INTO employees VALUES (1,'John','Doe',55000,1);
+INSERT INTO employees VALUES (2,'Jane','Smith',80000,2);
+INSERT INTO employees VALUES (3,'David','Kimani',80000,1);
+
+-- Join employees with departments
+
+SELECT
+e.first_name,
+e.last_name,
+d.department_name
+FROM employees e
+JOIN departments d
+ON e.department_id = d.department_id;

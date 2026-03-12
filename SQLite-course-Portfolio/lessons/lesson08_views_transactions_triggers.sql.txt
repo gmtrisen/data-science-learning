@@ -1,0 +1,37 @@
+-- LESSON 8: Views, Transactions and Triggers
+
+-- Create view for employee summary
+
+CREATE VIEW employee_summary AS
+SELECT
+e.employee_id,
+e.first_name || ' ' || e.last_name AS full_name,
+e.salary,
+d.department_name
+FROM employees e
+JOIN departments d
+ON e.department_id = d.department_id;
+
+-- Query the view
+
+SELECT * FROM employee_summary;
+
+-- Example transaction
+
+BEGIN TRANSACTION;
+
+UPDATE employees
+SET salary = salary + 5000
+WHERE department_id = 1;
+
+COMMIT;
+
+-- Trigger to prevent negative salaries
+
+CREATE TRIGGER prevent_negative_salary
+BEFORE INSERT ON employees
+FOR EACH ROW
+WHEN NEW.salary < 0
+BEGIN
+SELECT RAISE(ABORT, 'Salary cannot be negative');
+END;

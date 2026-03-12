@@ -1,0 +1,26 @@
+-- LESSON 2: INSERT and SELECT statements
+
+-- Insert product records
+
+INSERT INTO products (product_name, category, price, stock)
+VALUES ('Laptop', 'Electronics', 80000, 10);
+
+INSERT INTO products (product_name, category, price, stock)
+VALUES ('Phone', 'Electronics', 45000, 15);
+
+INSERT INTO products (product_name, category, price, stock)
+VALUES ('Desk', 'Furniture', 12000, 5);
+
+INSERT INTO products (product_name, category, price, stock)
+VALUES ('Chair', 'Furniture', 6000, 20);
+
+INSERT INTO products (product_name, category, price, stock)
+VALUES ('Book', 'Stationery', 1500, 50);
+
+-- Retrieve all records
+
+SELECT * FROM products;
+
+-- Retrieve specific columns
+
+SELECT product_name, price FROM products;

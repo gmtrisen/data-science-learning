@@ -1,0 +1,20 @@
+-- LESSON 3: UPDATE and DELETE
+
+-- Update product price
+
+UPDATE products
+SET price = 55000
+WHERE product_name = 'Laptop';
+
+-- Check update
+
+SELECT * FROM products;
+
+-- Delete a product
+
+DELETE FROM products
+WHERE product_name = 'Book';
+
+-- Check remaining records
+
+SELECT * FROM products;

@@ -1,0 +1,21 @@
+-- LESSON 4: Aggregate Functions
+
+-- Count number of products
+
+SELECT COUNT(*) FROM products;
+
+-- Calculate average price
+
+SELECT AVG(price) FROM products;
+
+-- Find highest price
+
+SELECT MAX(price) FROM products;
+
+-- Find lowest price
+
+SELECT MIN(price) FROM products;
+
+-- Total stock
+
+SELECT SUM(stock) FROM products;

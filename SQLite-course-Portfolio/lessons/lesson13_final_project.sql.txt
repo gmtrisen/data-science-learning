@@ -1,0 +1,54 @@
+-- LESSON 13: Final Project
+-- Company Management Database
+
+-- View for project assignments
+
+CREATE VIEW project_assignments AS
+SELECT
+e.first_name,
+e.last_name,
+d.department_name,
+p.project_name
+FROM employees e
+JOIN departments d
+ON e.department_id = d.department_id
+JOIN employee_projects ep
+ON e.employee_id = ep.employee_id
+JOIN projects p
+ON ep.project_id = p.project_id;
+
+-- Query the project report
+
+SELECT * FROM project_assignments;
+
+-- Salary ranking view
+
+CREATE VIEW salary_ranking AS
+SELECT
+first_name,
+last_name,
+salary,
+DENSE_RANK() OVER(ORDER BY salary DESC) AS salary_rank
+FROM employees;
+
+-- Query salary ranking
+
+SELECT * FROM salary_ranking;
+
+-- Trigger to prevent negative salary
+
+CREATE TRIGGER prevent_negative_salary
+BEFORE INSERT ON employees
+FOR EACH ROW
+WHEN NEW.salary < 0
+BEGIN
+SELECT RAISE(ABORT,'Salary cannot be negative');
+END;
+
+-- Performance indexes
+
+CREATE INDEX idx_emp_department
+ON employees(department_id);
+
+CREATE INDEX idx_project_department
+ON projects(department_id);

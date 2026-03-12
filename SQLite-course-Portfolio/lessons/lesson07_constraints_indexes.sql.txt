@@ -1,0 +1,30 @@
+-- LESSON 7: Constraints and Indexes
+
+-- Create employees table with constraints
+
+CREATE TABLE employees_constraints(
+    employee_id INTEGER PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    email TEXT UNIQUE,
+    salary REAL CHECK(salary >= 0),
+    department TEXT
+);
+
+-- Insert valid record
+
+INSERT INTO employees_constraints
+(first_name, last_name, email, salary, department)
+VALUES
+('Alice','Mwangi','alice@email.com',50000,'IT');
+
+-- Create index for faster search
+
+CREATE INDEX idx_employee_salary
+ON employees_constraints(salary);
+
+-- Query using the indexed column
+
+SELECT *
+FROM employees_constraints
+WHERE salary > 40000;
